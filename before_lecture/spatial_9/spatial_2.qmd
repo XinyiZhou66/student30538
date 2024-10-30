@@ -422,8 +422,24 @@ Goal: Create and plot a 500m buffer zone around the dense areas in Austin.
 Steps
 
 1. From the `dissolved` `GeoDataFrame`, get the polygon for the dense areas
+
+```{python}
+dense_areas = dissolved[dissolved['dense'] == 1]
+```
+
 2. Create a new geometry object called `geo`, which is the dense areas with a 500m buffer
+
+```{python}
+geo = dense_areas.copy()
+geo['geometry'] = geo.buffer(500)
+```
+
 3. `geo.plot()` 
+
+```{python}
+austin = dissolved.plot(color="grey")
+geo.plot(ax=austin, alpha=0.5)
+```
 
 After you are done, here are some cosmetic suggestions:
 
